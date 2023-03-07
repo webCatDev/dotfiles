@@ -1,0 +1,51 @@
+general {
+  output_format = "i3bar"
+  colors = true
+  color_good = "#50FA7B"
+  color_degraded = "#F1FA8C"
+  color_bad = "#FF5555"
+}
+
+order += "disk /"
+order += "cpu_usage"
+order += "battery 0"
+order += "tztime local"
+order += "tztime istanbul"
+order += "volume master"
+
+disk "/" {
+  format = " 📀 %percentage_used "
+}
+
+cpu_usage {
+  format = " ⚛️ %usage "
+}
+
+battery 0 {
+        format = "%status "
+        format_down = " 🪫 No Battery "
+        status_chr = " ⚡ Charging "
+        status_bat = " 🔋 Bat "
+        status_unk = " 🤷 Unknown "
+        status_full = " 🔋Full "
+        path = "/sys/class/power_supply/BAT1/uevent"
+        low_threshold = 10
+}
+
+tztime local {
+        format = " 📆 %Y-%m-%d 🕐 %H:%M:%S "
+        hide_if_equals_localtime = true
+}
+
+tztime istanbul {
+        format = " 📆 %Y-%m-%d 🕐 %H:%M:%S "
+        timezone = "Europe/Istanbul"
+}
+
+volume master {
+        format = " 📢 %volume"
+        format_muted = " 🔇 muted (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
